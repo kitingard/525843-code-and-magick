@@ -15,7 +15,7 @@ var BAR_GAP = 245;
 var barHeight = 150;
 
 var getRandomColor = function (min, max) {
-  return (Math.Random() * (max - min) + min);
+  return (Math.random() * (max - min) + min);
 };
 
 var renderCloud = function (ctx, x, y, color) {
@@ -53,7 +53,7 @@ window.renderStatistics = function (ctx, names, times) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = 'rgba(0, 0, 255, getRandomColor(0.1, 1.1))';
+      ctx.fillStyle = 'rgba(0, 0, 255, ' + getRandomColor(0.1, 1.1) + ')';
     }
     ctx.fillRect(CLOUD_X + ((RECT_GAP + BAR_WIDTH) * i) + RECT_GAP, BAR_GAP, BAR_WIDTH, -(barHeight * Math.floor(times[i]) / maxTime));
   }
