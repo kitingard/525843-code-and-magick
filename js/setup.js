@@ -12,7 +12,11 @@ var MIN_ELEMENT = 0;
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    closePopup();
+    if (userNameInput === evt.target) {
+      evt.stopPropagation();
+    } else {
+      closePopup();
+    }
   }
 };
 
@@ -86,8 +90,9 @@ var getEyesColor = function () {
 };
 
 var getFireballColor = function () {
-  fireball.style.backgroundColor = fireballColors[getRandom(MIN_ELEMENT, (fireballColors.length - 1))];
-  setupColorInputs[2].value = fireball.style.backgroundColor;
+  var fireballColor = fireballColors[getRandom(MIN_ELEMENT, (fireballColors.length - 1))];
+  fireball.style.backgroundColor = fireballColor;
+  setupColorInputs[2].value = fireballColor;
 };
 
 wizardCoat.addEventListener('click', function () {
