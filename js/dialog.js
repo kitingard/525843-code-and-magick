@@ -2,9 +2,9 @@
 (function () {
   var setupDialogElement = document.querySelector('.setup');
   var dialogHandler = setupDialogElement.querySelector('.upload');
-  var setupOpen = document.querySelector('.setup-open');
+  var setupOpenButton = document.querySelector('.setup-open');
 
-  setupOpen.addEventListener('click', function () {
+  setupOpenButton.addEventListener('click', function () {
     setupDialogElement.style.top = '';
     setupDialogElement.style.left = '';
   });
