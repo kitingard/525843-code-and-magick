@@ -13,7 +13,7 @@
       if (window.userNameInput === evt.target) {
         evt.stopPropagation();
       } else {
-        closePopup();
+        window.closePopup();
       }
     }
   };
@@ -23,7 +23,7 @@
     document.addEventListener('keydown', onPopupEscPress);
   };
 
-  var closePopup = function () {
+  window.closePopup = function () {
     setup.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
   };
@@ -40,12 +40,12 @@
   });
 
   setupClose.addEventListener('click', function () {
-    closePopup();
+    window.closePopup();
   });
 
   setupClose.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
-      closePopup();
+      window.closePopup();
     }
   });
 })();

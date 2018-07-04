@@ -2,6 +2,7 @@
 
 (function () {
   window.userNameInput = document.querySelector('.setup-user-name');
+  var form = document.querySelector('.setup-wizard-form');
 
   window.userNameInput.addEventListener('invalid', function () {
     if (window.userNameInput.validity.tooShort) {
@@ -14,4 +15,12 @@
       window.userNameInput.setCustomValidity('');
     }
   });
+
+  form.addEventListener('submit', function (evt) {
+    window.save(new FormData(form), function () {
+      window.closePopup();
+    });
+    evt.preventDefault();
+  });
+
 })();

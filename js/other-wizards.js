@@ -1,30 +1,30 @@
 'use strict';
 
 (function () {
-  var wizards = [];
-  var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-  var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
   var WIZARDS_QUANTITY = 4;
   var similarWizardElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-  for (var i = 0; i < WIZARDS_QUANTITY; i++) {
-    wizards[i] = {
-      name: names[window.getRandom(window.MIN_ELEMENT, (names.length - 1))] + ' ' + surnames[window.getRandom(window.MIN_ELEMENT, (surnames.length - 1))],
-      coatColor: window.coatColors[window.getRandom(window.MIN_ELEMENT, (window.coatColors.length - 1))],
-      eyesColor: window.eyesColors[window.getRandom(window.MIN_ELEMENT, (window.eyesColors.length - 1))]
-    };
-  }
-
-  for (i = 0; i < wizards.length; i++) {
+  var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
-    wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
+    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
-    similarWizardElement.appendChild(wizardElement);
-  }
+    return wizardElement;
+  };
 
-  document.querySelector('.setup-similar').classList.remove('hidden');
+  var onSuccess = function (wizards) {
+    var fragment = document.createDocumentFragment();
+
+    for (window.i = 0; window.i < WIZARDS_QUANTITY; window.i++) {
+      fragment.appendChild(renderWizard(wizards[window.i]));
+    }
+    similarWizardElement.appendChild(fragment);
+    document.querySelector('.setup-similar').classList.remove('hidden');
+  };
+
+  window.load(onSuccess);
+
 })();
