@@ -66,10 +66,23 @@
     xhrLoad.open('GET', GET_URL);
 
     xhrLoad.addEventListener('load', function () {
-      if (xhrLoad.status === 200) {
-        onLoad(xhrLoad.response);
-      } else {
-        onError('Статус ответа: ' + xhrLoad.status + ' ' + xhrLoad.statusText);
+      switch (xhrLoad.status) {
+        case 200:
+          onLoad(xhrLoad.response);
+          break;
+
+        case 400:
+          onError('Неверный запрос');
+          break;
+        case 401:
+          onError('Пользователь не авторизован');
+          break;
+        case 404:
+          onError('Ничего не найдено');
+          break;
+
+        default:
+          onError('Cтатус ответа: : ' + xhrLoad.status + ' ' + xhrLoad.statusText);
       }
     });
     xhrLoad.addEventListener('error', function () {
